@@ -1,359 +1,476 @@
 ---
-// Zynthera | The Cinematic Manifesto
-// Full About Page Code with Updated Hero and Ticker Animation
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+
+// BaseLayout props
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title = "Our Manifesto | Zynthera",
+  description = "A software solution startup founded on the intersection of structural logic and human emotion.",
+  image = "/images/logo.jpeg",
+  canonical = ""
+} = Astro.props;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: title,
+  description: description,
+  url: canonical || Astro.url.href
+};
 ---
 
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Our Manifesto | Zynthera</title>
-		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
-	</head>
-	<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content={description} />
 
-		<main class="smooth-scroll-container">
-			
-			<section class="hero-manifesto">
-				
-				<div class="hero-mask-graphic mask-reveal">
-					<div class="mask-layer light-blue"></div>
-					<div class="mask-layer white-fade"></div>
-					<img src="https://images.unsplash.com/photo-1549497538-303791108f94?q=80&w=1964&auto=format&fit=crop" alt="Abstract architectural sculpture" class="hero-artwork-image" />
-				</div>
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical || Astro.url.href} />
 
-				<div class="hero-center z-20">
-					<div class="mask"><h1 class="m-title y-20">The Power</h1></div>
-					<div class="mask"><h1 class="m-title y-20">Of <span class="blue-glow">Dualism.</span></h1></div>
-					<p class="hero-sub y-10">A software solution startup founded on the intersection of structural logic and human emotion.</p>
-				</div>
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
 
-				<div class="scroll-indicator z-20 y-10">
-					<div class="indicator-inner">
-						<span>Explore</span>
-						<div class="scroll-line">
-							<div class="dot"></div>
-						</div>
-					</div>
-				</div>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-				<div class="marquee-ticker z-10 y-10">
-					<div class="ticker-content">
-						<span>ARCHITECTURE • SPEED • LOGIC • DESIGN • </span>
-						<span>ARCHITECTURE • SPEED • LOGIC • DESIGN • </span>
-						<span>ARCHITECTURE • SPEED • LOGIC • DESIGN • </span>
-						<span>ARCHITECTURE • SPEED • LOGIC • DESIGN • </span>
-					</div>
-				</div>
-			</section>
+    <!-- Canonical URL -->
+    {canonical && <link rel="canonical" href={canonical} />}
 
-			<section class="narrative-block white-bg">
-				<div class="content-limit">
-					<div class="chapter-info reveal">
-						<span class="num">01</span>
-						<span class="label">The Genesis</span>
-					</div>
-					<h2 class="big-text reveal">It started with a conversation about <span class="italic">integrity.</span></h2>
-					
-					<div class="long-copy reveal">
-						<p>In early 2024, Zynthera was nothing more than a shared frustration. Two individuals from opposite ends of the technical spectrum sat across a table in a world increasingly dominated by "minimum viable products." We saw a digital landscape that was becoming cluttered, heavy, and ultimately, soul-less.</p>
-						<p>We asked ourselves a simple question: What happens when you apply architectural principles—permanence, light, and structural honesty—to the world of software? The answer was Zynthera. We didn't want to build an agency that managed hundreds of projects poorly. We wanted to build a sanctuary for high-performance code.</p>
-						<p>This journey wasn't about rapid scaling or venture capital. It was about reclaiming the craft. We spent months defining our "blueprint"—a set of non-negotiable standards that ensure every line of code we write is as intentional as a load-bearing beam in a skyscraper.</p>
-					</div>
-				</div>
-			</section>
+    <!-- Preconnect for external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-			<section class="visual-break">
-				<div class="parallax-bg" data-speed="0.3">
-					<img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=2069&auto=format&fit=crop" alt="Abstract Office" />
-				</div>
-				<div class="overlay-text">
-					<h3>"Code is the invisible architecture of the modern world."</h3>
-				</div>
-			</section>
+    <!-- Fonts for About page -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet" />
 
-			<section class="member-deep-dive" id="architect">
-				<div class="member-grid">
-					<div class="m-visual reveal-left">
-						<div class="img-frame">
-							<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop" alt="Systems Lead" />
-						</div>
-					</div>
-					<div class="m-text reveal-right">
-						<span class="tag">The Blueprint</span>
-						<h3 class="m-heading">The Systems Architect</h3>
-						<div class="bio-long">
-							<p>Logic is not just a tool; it is a philosophy. For our technical lead, building a backend is akin to designing a city's power grid. It must be redundant, it must be efficient, and it must be invisible to the end user.</p>
-							<p>With a background in deep-systems engineering, he views every project as a challenge of optimization. Why use ten servers when one, perfectly tuned, can do the job? His work at Zynthera ensures that your business sits on a foundation that can survive the weight of global scale. He believes in 'Transparent Engineering'—where the complexity is handled internally, leaving the user with a feeling of absolute stability.</p>
-						</div>
-					</div>
-				</div>
-			</section>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-			<section class="member-deep-dive reverse" id="designer">
-				<div class="member-grid">
-					<div class="m-visual reveal-right">
-						<div class="img-frame">
-							<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop" alt="UX Lead" />
-						</div>
-					</div>
-					<div class="m-text reveal-left">
-						<span class="tag">The Light</span>
-						<h3 class="m-heading">The Visual Strategist</h3>
-						<div class="bio-long">
-							<p>Design is the bridge between a machine and a human. Our experience lead doesn't believe in "decorating" software. She believes in sculpting it. Drawing inspiration from tropical modernism and minimalist architecture, her goal is to bring "breathable space" to the screen.</p>
-							<p>At Zynthera, she ensures that every interaction feels weighted and intentional. By focusing on light themes, high-contrast typography, and fluid animations, she transforms dry data into an emotional experience. To her, a user interface isn't just buttons and menus—it's a digital environment where people spend their time. It should be as comfortable as a well-lit room.</p>
-						</div>
-					</div>
-				</div>
-			</section>
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
-			<section class="philosophy-scroll">
-				<div class="sticky-title">
-					<h2>Our Pillars</h2>
-				</div>
-				<div class="pillars-container">
-					<div class="pillar-item p-reveal">
-						<h4>Structural Honesty</h4>
-						<p>We don't hide bad code behind fancy buttons. We believe that true beauty in software comes from a codebase that is as clean as the UI it powers.</p>
-					</div>
-					<div class="pillar-item p-reveal">
-						<h4>Intentional Motion</h4>
-						<p>Animation should never be a distraction. In a Zynthera build, motion is used to guide the eye and provide feedback, not just for "show."</p>
-					</div>
-					<div class="pillar-item p-reveal">
-						<h4>The Human Ratio</h4>
-						<p>No matter how complex the algorithm, the end-user is always a human. We optimize for psychology, not just CPU cycles.</p>
-					</div>
-				</div>
-			</section>
+    <title>{title}</title>
 
-			<section class="conclusion">
-				<div class="final-box reveal">
-					<h2>Ready to build <span class="blue-glow">the future?</span></h2>
-					<p>We are a small team with a massive vision. If you value quality over quantity, we are the architects you've been looking for.</p>
-				</div>
-			</section>
+    <style is:global>
+      /* CSS Reset */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-		</main>
+      html {
+        scroll-behavior: smooth;
+      }
 
-		<style>
-			:root {
-				--blue: #3FB6FF;
-				--bg: #F9FBFF;
-				--text: #0A111F;
-				--muted: #64748B;
-				--white: #ffffff;
-			}
+      ul, ol { list-style: none; }
+      button { background: none; border: none; cursor: pointer; }
+      a { text-decoration: none; color: inherit; }
 
-			* { margin: 0; padding: 0; box-sizing: border-box; }
-			body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+      html, body { height: 100%; }
 
-			/* Chapter Styling */
-			.mask { overflow: hidden; }
-			.blue-glow { color: var(--blue); text-shadow: 0 0 30px rgba(63, 182, 255, 0.2); }
-			.italic { font-family: 'Playfair Display', serif; font-style: italic; }
-			
-			/* Universal GSAP class preparation */
-			.z-10 { z-index: 10; position: relative; }
-			.z-20 { z-index: 20; position: relative; }
-			.y-20 { transform: translateY(110%); } /* Rise-in preparation */
-			.y-10 { opacity: 0; transform: translateY(30px); } /* Fade-in preparation */
+      body {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        line-height: 1.5;
+        color: #1a1a1a;
+        background-color: #ffffff;
+        overflow-x: hidden;
+      }
 
-			/* --- HERO: Updated with Artwork --- */
-			.hero-manifesto {
-				position: relative;
-				height: 100vh;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				background: var(--white);
-				overflow: hidden; /* Important for ticker and graphic positioning */
-			}
+      img { max-width: 100%; height: auto; display: block; }
 
-			.hero-center { text-align: center; max-width: 900px; }
-			.m-title { font-size: clamp(3rem, 10vw, 9rem); font-weight: 800; line-height: 0.85; letter-spacing: -5px; }
-			.hero-sub { margin-top: 3rem; font-size: 1.4rem; color: var(--muted); max-width: 600px; margin-left: auto; margin-right: auto; }
+      :focus-visible { outline: 2px solid #0066ff; outline-offset: 2px; }
+      ::selection { background-color: #0066ff; color: white; }
 
-			/* Architectural Graphic */
-			.hero-mask-graphic {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%) scale(0.9);
-				width: 65vw; /* Expansive, light-filled shape */
-				height: 80vh;
-				border-radius: 80px;
-				z-index: 10;
-				overflow: hidden;
-				opacity: 0;
-			}
+      /* Layout container — critical for sticky footer */
+      .layout-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
 
-			.hero-artwork-image {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				mix-blend-mode: soft-light; /* Essential for 'light' website integration */
-				filter: brightness(1.1) contrast(0.9) grayscale(20%); /* Cool, refined tone */
-			}
+      main {
+        flex: 1;
+        margin-top: 80px; /* Space for fixed header */
+      }
 
-			/* Depth layers for the artwork */
-			.mask-layer { position: absolute; inset: 0; z-index: 11; }
-			.mask-layer.light-blue { background: linear-gradient(135deg, rgba(63, 182, 255, 0.1) 0%, transparent 60%); }
-			.mask-layer.white-fade { background: linear-gradient(180deg, var(--white) 0%, transparent 20%, transparent 80%, var(--white) 100%); }
+      .layout-container > * { margin: 0; }
+    </style>
+  </head>
+  <body>
+    <div class="layout-container">
+      <Header />
 
+      <main>
+        <!-- ===================== ABOUT PAGE CONTENT ===================== -->
+        <div class="smooth-scroll-container">
 
-			/* --- SCROLL INDICATOR (UPDATED) --- */
-			.scroll-indicator { position: absolute; bottom: 5vh; right: 5vw; }
-			.indicator-inner { display: flex; align-items: center; gap: 1.5rem; color: var(--muted); font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; }
-			.scroll-line { width: 1px; height: 60px; background: rgba(0,0,0,0.1); position: relative; overflow: hidden; }
-			.scroll-line .dot {
-				width: 100%; height: 25px; background: var(--blue); position: absolute; top: -30px; /* Hidden start */
-				animation: scroll-drop 1.8s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-			}
-			@keyframes scroll-drop { 0% { top: -30px; height: 10px; } 50% { top: 15px; height: 25px; } 100% { top: 65px; height: 10px; } }
+          <!-- HERO -->
+          <section class="hero-manifesto">
 
+            <div class="hero-mask-graphic mask-reveal">
+              <div class="mask-layer light-blue"></div>
+              <div class="mask-layer white-fade"></div>
+              <img
+                src="https://images.unsplash.com/photo-1549497538-303791108f94?q=80&w=1964&auto=format&fit=crop"
+                alt="Abstract architectural sculpture"
+                class="hero-artwork-image"
+              />
+            </div>
 
-			/* --- ADDED: Continuous Ticker (Marquee) --- */
-			.marquee-ticker {
-				position: absolute;
-				bottom: 12vh; /* Positioned just above the main subtext line */
-				left: 0;
-				width: 100%;
-				background: transparent;
-				color: rgba(10, 17, 31, 0.08); /* VERY subtle text, like your example */
-				padding: 1rem 0;
-				overflow: hidden;
-				white-space: nowrap;
-			}
+            <div class="hero-center z-20">
+              <div class="mask"><h1 class="m-title y-20">The Power</h1></div>
+              <div class="mask"><h1 class="m-title y-20">Of <span class="blue-glow">Dualism.</span></h1></div>
+              <p class="hero-sub y-10">A software solution startup founded on the intersection of structural logic and human emotion.</p>
+            </div>
 
-			.ticker-content { display: inline-block; animation: marquee-scroll 60s linear infinite; } /* Extremely slow, graceful scroll */
-			.ticker-content span { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 8rem; font-weight: 800; letter-spacing: -2px; }
+            <div class="scroll-indicator z-20 y-10">
+              <div class="indicator-inner">
+                <span>Explore</span>
+                <div class="scroll-line">
+                  <div class="dot"></div>
+                </div>
+              </div>
+            </div>
 
-			@keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } } /* Loop seamlessly */
+            <div class="marquee-ticker z-10 y-10">
+              <div class="ticker-content">
+                <span>ARCHITECTURE • SPEED • LOGIC • DESIGN • </span>
+                <span>ARCHITECTURE • SPEED • LOGIC • DESIGN • </span>
+                <span>ARCHITECTURE • SPEED • LOGIC • DESIGN • </span>
+                <span>ARCHITECTURE • SPEED • LOGIC • DESIGN • </span>
+              </div>
+            </div>
+          </section>
 
+          <!-- NARRATIVE -->
+          <section class="narrative-block white-bg">
+            <div class="content-limit">
+              <div class="chapter-info reveal">
+                <span class="num">01</span>
+                <span class="label">The Genesis</span>
+              </div>
+              <h2 class="big-text reveal">It started with a conversation about <span class="italic">integrity.</span></h2>
+              <div class="long-copy reveal">
+                <p>In early 2024, Zynthera was nothing more than a shared frustration. Two individuals from opposite ends of the technical spectrum sat across a table in a world increasingly dominated by "minimum viable products." We saw a digital landscape that was becoming cluttered, heavy, and ultimately, soul-less.</p>
+                <p>We asked ourselves a simple question: What happens when you apply architectural principles—permanence, light, and structural honesty—to the world of software? The answer was Zynthera. We didn't want to build an agency that managed hundreds of projects poorly. We wanted to build a sanctuary for high-performance code.</p>
+                <p>This journey wasn't about rapid scaling or venture capital. It was about reclaiming the craft. We spent months defining our "blueprint"—a set of non-negotiable standards that ensure every line of code we write is as intentional as a load-bearing beam in a skyscraper.</p>
+              </div>
+            </div>
+          </section>
 
-			/* --- REST OF SECTIONS --- */
-			.narrative-block { padding: 15vw 10%; background: var(--white); }
-			.content-limit { max-width: 1000px; margin: 0 auto; }
-			.chapter-info { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
-			.chapter-info .num { font-weight: 800; color: var(--blue); }
-			.big-text { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 4rem; letter-spacing: -2px; }
-			.long-copy p { font-size: clamp(1rem, 3vw, 1.4rem); color: var(--muted); margin-bottom: 2rem; max-width: 800px; }
+          <!-- VISUAL BREAK -->
+          <section class="visual-break">
+            <div class="parallax-bg" data-speed="0.3">
+              <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=2069&auto=format&fit=crop" alt="Abstract Office" />
+            </div>
+            <div class="overlay-text">
+              <h3>"Code is the invisible architecture of the modern world."</h3>
+            </div>
+          </section>
 
-			.visual-break { height: 80vh; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-			.parallax-bg { position: absolute; top: 0; left: 0; width: 100%; height: 120%; z-index: -1; }
-			.parallax-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7); }
-			.overlay-text h3 { color: white; font-size: 3rem; font-family: 'Playfair Display'; font-style: italic; text-align: center; padding: 0 10%; }
+          <!-- MEMBER: ARCHITECT -->
+          <section class="member-deep-dive" id="architect">
+            <div class="member-grid">
+              <div class="m-visual reveal-left">
+                <div class="img-frame">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop" alt="Systems Lead" />
+                </div>
+              </div>
+              <div class="m-text reveal-right">
+                <span class="tag">The Blueprint</span>
+                <h3 class="m-heading">The Systems Architect</h3>
+                <div class="bio-long">
+                  <p>Logic is not just a tool; it is a philosophy. For our technical lead, building a backend is akin to designing a city's power grid. It must be redundant, it must be efficient, and it must be invisible to the end user.</p>
+                  <p>With a background in deep-systems engineering, he views every project as a challenge of optimization. Why use ten servers when one, perfectly tuned, can do the job? His work at Zynthera ensures that your business sits on a foundation that can survive the weight of global scale. He believes in 'Transparent Engineering'—where the complexity is handled internally, leaving the user with a feeling of absolute stability.</p>
+                </div>
+              </div>
+            </div>
+          </section>
 
-			.member-deep-dive { padding: 10vw 10%; }
-			.member-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5vw; align-items: center; }
-			.reverse .member-grid { grid-template-columns: 0.8fr 1.2fr; }
-			.img-frame { height: clamp(400px, 60vh, 700px); border-radius: 40px; overflow: hidden; transform: scale(0.9); opacity: 0; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
-			.img-frame img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s transform ease; }
-			.member-deep-dive:hover .img-frame img { transform: scale(1.08); }
-			.m-heading { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; margin: 1rem 0; letter-spacing: -1px; }
-			.tag { color: var(--blue); font-weight: 800; text-transform: uppercase; letter-spacing: 4px; font-size: 0.9rem; }
-			.bio-long p { font-size: 1.2rem; color: var(--muted); margin-bottom: 1.5rem; }
+          <!-- MEMBER: DESIGNER -->
+          <section class="member-deep-dive reverse" id="designer">
+            <div class="member-grid">
+              <div class="m-visual reveal-right">
+                <div class="img-frame">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop" alt="UX Lead" />
+                </div>
+              </div>
+              <div class="m-text reveal-left">
+                <span class="tag">The Light</span>
+                <h3 class="m-heading">The Visual Strategist</h3>
+                <div class="bio-long">
+                  <p>Design is the bridge between a machine and a human. Our experience lead doesn't believe in "decorating" software. She believes in sculpting it. Drawing inspiration from tropical modernism and minimalist architecture, her goal is to bring "breathable space" to the screen.</p>
+                  <p>At Zynthera, she ensures that every interaction feels weighted and intentional. By focusing on light themes, high-contrast typography, and fluid animations, she transforms dry data into an emotional experience. To her, a user interface isn't just buttons and menus—it's a digital environment where people spend their time. It should be as comfortable as a well-lit room.</p>
+                </div>
+              </div>
+            </div>
+          </section>
 
-			.philosophy-scroll { padding: 10vw 10%; display: flex; gap: 5vw; background: var(--white); }
-			.sticky-title { position: sticky; top: 20vh; height: fit-content; flex: 1; }
-			.sticky-title h2 { font-size: clamp(3rem, 7vw, 6rem); font-weight: 800; line-height: 1; color: var(--blue); }
-			.pillars-container { flex: 1.2; }
-			.pillar-item { padding: 4rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
-			.pillar-item h4 { font-size: 2.5rem; margin-bottom: 1rem; }
-			.pillar-item p { font-size: 1.2rem; color: var(--muted); }
+          <!-- PHILOSOPHY -->
+          <section class="philosophy-scroll">
+            <div class="sticky-title">
+              <h2>Our Pillars</h2>
+            </div>
+            <div class="pillars-container">
+              <div class="pillar-item p-reveal">
+                <h4>Structural Honesty</h4>
+                <p>We don't hide bad code behind fancy buttons. We believe that true beauty in software comes from a codebase that is as clean as the UI it powers.</p>
+              </div>
+              <div class="pillar-item p-reveal">
+                <h4>Intentional Motion</h4>
+                <p>Animation should never be a distraction. In a Zynthera build, motion is used to guide the eye and provide feedback, not just for "show."</p>
+              </div>
+              <div class="pillar-item p-reveal">
+                <h4>The Human Ratio</h4>
+                <p>No matter how complex the algorithm, the end-user is always a human. We optimize for psychology, not just CPU cycles.</p>
+              </div>
+            </div>
+          </section>
 
-			.conclusion { padding: 15vw 10%; background: var(--white); text-align: center; }
-			.final-box { max-width: 900px; margin: 0 auto; background: var(--bg); padding: clamp(4rem, 10vw, 8rem); border-radius: 80px; }
-			.final-box h2 { font-size: clamp(3rem, 7vw, 5rem); font-weight: 800; margin-bottom: 2rem; letter-spacing: -2px; }
+          <!-- CONCLUSION -->
+          <section class="conclusion">
+            <div class="final-box reveal">
+              <h2>Ready to build <span class="blue-glow">the future?</span></h2>
+              <p>We are a small team with a massive vision. If you value quality over quantity, we are the architects you've been looking for.</p>
+            </div>
+          </section>
 
-			@media (max-width: 1024px) {
-				.member-grid, .reverse .member-grid, .philosophy-scroll { grid-template-columns: 1fr; display: block; }
-				.img-frame { height: 450px; margin-bottom: 3rem; }
-				.sticky-title { position: relative; top: 0; margin-bottom: 3rem; }
-				.ticker-content span { font-size: 15vw; }
-			}
-		</style>
+        </div>
+        <!-- ===================== END ABOUT PAGE CONTENT ===================== -->
+      </main>
 
-		<script>
-			import { gsap } from "gsap";
-			import { ScrollTrigger } from "gsap/ScrollTrigger";
-			gsap.registerPlugin(ScrollTrigger);
+      <Footer />
+    </div>
 
-			window.addEventListener("load", () => {
-				
-				// Hero Entrance Timeline (Layered Reveal)
-				const heroTl = gsap.timeline();
-				heroTl
-					// 1. Reveal the underlying visual graphic shape
-					.to(".hero-mask-graphic", { opacity: 1, scale: 1, duration: 2, ease: "expo.out" })
-					// 2. Rising text reveals (Titles)
-					.to(".m-title", { translateY: 0, duration: 1.5, ease: "power4.out", stagger: 0.2 }, "-=1.5")
-					// 3. Fading text and indicator elements
-					.to(".hero-sub, .marquee-ticker", { opacity: 1, y: 0, duration: 1, stagger: 0.1 }, "-=1")
-					.to(".scroll-indicator", { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "-=0.8");
+    <!-- ===================== ABOUT PAGE STYLES ===================== -->
+    <style>
+      :root {
+        --blue: #3FB6FF;
+        --bg: #F9FBFF;
+        --text: #0A111F;
+        --muted: #64748B;
+        --white: #ffffff;
+      }
 
-				// Universal Reveal for standard sections
-				const reveals = gsap.utils.toArray(".reveal, .reveal-left, .reveal-right");
-				reveals.forEach((el) => {
-					gsap.to(el, {
-						scrollTrigger: {
-							trigger: el,
-							start: "top 85%",
-						},
-						y: 0,
-						opacity: 1,
-						duration: 1.2,
-						ease: "power3.out"
-					});
-				});
+      /* Chapter Styling */
+      .mask { overflow: hidden; }
+      .blue-glow { color: var(--blue); text-shadow: 0 0 30px rgba(63, 182, 255, 0.2); }
+      .italic { font-family: 'Playfair Display', serif; font-style: italic; }
 
-				// Visual Artwork Parallax (Motion within the shape)
-				gsap.to(".hero-artwork-image", {
-					y: -100, /* Subtle shift on scroll */
-					ease: "none",
-					scrollTrigger: {
-						trigger: ".hero-manifesto",
-						start: "top top",
-						end: "bottom top",
-						scrub: true
-					}
-				});
+      /* GSAP class preparation */
+      .z-10 { z-index: 10; position: relative; }
+      .z-20 { z-index: 20; position: relative; }
+      .y-20 { transform: translateY(110%); }
+      .y-10 { opacity: 0; transform: translateY(30px); }
 
-				// Large Visual Break Parallax
-				gsap.to(".parallax-bg img", {
-					yPercent: 30,
-					ease: "none",
-					scrollTrigger: {
-						trigger: ".visual-break",
-						scrub: true
-					}
-				});
+      /* HERO */
+      .hero-manifesto {
+        position: relative;
+        /* Full-screen minus the 80px header margin already applied by main */
+        height: calc(100vh - 80px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--white);
+        overflow: hidden;
+      }
 
-				// Member Bio Stagger and Scale Reveal
-				gsap.utils.toArray(".member-deep-dive").forEach((section) => {
-					const imgFrame = section.querySelector(".img-frame");
-					const txt = section.querySelector(".m-text");
-					
-					gsap.to(imgFrame, { scrollTrigger: { trigger: section, start: "top 75%" }, opacity: 1, scale: 1, duration: 2, ease: "expo.out" });
-					gsap.from(txt, { scrollTrigger: { trigger: section, start: "top 75%" }, opacity: 0, y: 50, duration: 1.2, delay: 0.3 });
-				});
+      .hero-center { text-align: center; max-width: 900px; }
+      .m-title { font-size: clamp(3rem, 10vw, 9rem); font-weight: 800; line-height: 0.85; letter-spacing: -5px; }
+      .hero-sub { margin-top: 3rem; font-size: 1.4rem; color: var(--muted); max-width: 600px; margin-left: auto; margin-right: auto; }
 
-				// Philosophy Pillar Stagger
-				gsap.utils.toArray(".p-reveal").forEach((pillar) => {
-					gsap.from(pillar, {
-						scrollTrigger: {
-							trigger: pillar,
-							start: "top 90%",
-						},
-						opacity: 0,
-						x: -20,
-						duration: 1,
-						ease: "power2.out"
-					});
-				});
-			});
-		</script>
-	</body>
+      /* Architectural Graphic */
+      .hero-mask-graphic {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
+        width: 65vw;
+        height: 80%;
+        border-radius: 80px;
+        z-index: 10;
+        overflow: hidden;
+        opacity: 0;
+      }
+
+      .hero-artwork-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        mix-blend-mode: soft-light;
+        filter: brightness(1.1) contrast(0.9) grayscale(20%);
+      }
+
+      .mask-layer { position: absolute; inset: 0; z-index: 11; }
+      .mask-layer.light-blue { background: linear-gradient(135deg, rgba(63, 182, 255, 0.1) 0%, transparent 60%); }
+      .mask-layer.white-fade { background: linear-gradient(180deg, var(--white) 0%, transparent 20%, transparent 80%, var(--white) 100%); }
+
+      /* Scroll Indicator */
+      .scroll-indicator { position: absolute; bottom: 5vh; right: 5vw; }
+      .indicator-inner { display: flex; align-items: center; gap: 1.5rem; color: var(--muted); font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; }
+      .scroll-line { width: 1px; height: 60px; background: rgba(0,0,0,0.1); position: relative; overflow: hidden; }
+      .scroll-line .dot {
+        width: 100%; height: 25px; background: var(--blue); position: absolute; top: -30px;
+        animation: scroll-drop 1.8s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+      }
+      @keyframes scroll-drop {
+        0%   { top: -30px; height: 10px; }
+        50%  { top: 15px;  height: 25px; }
+        100% { top: 65px;  height: 10px; }
+      }
+
+      /* Marquee Ticker */
+      .marquee-ticker {
+        position: absolute;
+        bottom: 12vh;
+        left: 0;
+        width: 100%;
+        background: transparent;
+        color: rgba(10, 17, 31, 0.08);
+        padding: 1rem 0;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .ticker-content { display: inline-block; animation: marquee-scroll 60s linear infinite; }
+      .ticker-content span { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 8rem; font-weight: 800; letter-spacing: -2px; }
+      @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+      /* Narrative */
+      .narrative-block { padding: 15vw 10%; background: var(--white); }
+      .content-limit { max-width: 1000px; margin: 0 auto; }
+      .chapter-info { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+      .chapter-info .num { font-weight: 800; color: var(--blue); }
+      .big-text { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 4rem; letter-spacing: -2px; }
+      .long-copy p { font-size: clamp(1rem, 3vw, 1.4rem); color: var(--muted); margin-bottom: 2rem; max-width: 800px; }
+
+      /* Visual Break */
+      .visual-break { height: 80vh; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+      .parallax-bg { position: absolute; top: 0; left: 0; width: 100%; height: 120%; z-index: -1; }
+      .parallax-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7); }
+      .overlay-text h3 { color: white; font-size: 3rem; font-family: 'Playfair Display'; font-style: italic; text-align: center; padding: 0 10%; }
+
+      /* Members */
+      .member-deep-dive { padding: 10vw 10%; }
+      .member-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5vw; align-items: center; }
+      .reverse .member-grid { grid-template-columns: 0.8fr 1.2fr; }
+      .img-frame { height: clamp(400px, 60vh, 700px); border-radius: 40px; overflow: hidden; transform: scale(0.9); opacity: 0; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
+      .img-frame img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s transform ease; }
+      .member-deep-dive:hover .img-frame img { transform: scale(1.08); }
+      .m-heading { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; margin: 1rem 0; letter-spacing: -1px; }
+      .tag { color: var(--blue); font-weight: 800; text-transform: uppercase; letter-spacing: 4px; font-size: 0.9rem; }
+      .bio-long p { font-size: 1.2rem; color: var(--muted); margin-bottom: 1.5rem; }
+
+      /* Philosophy */
+      .philosophy-scroll { padding: 10vw 10%; display: flex; gap: 5vw; background: var(--white); }
+      .sticky-title { position: sticky; top: 20vh; height: fit-content; flex: 1; }
+      .sticky-title h2 { font-size: clamp(3rem, 7vw, 6rem); font-weight: 800; line-height: 1; color: var(--blue); }
+      .pillars-container { flex: 1.2; }
+      .pillar-item { padding: 4rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+      .pillar-item h4 { font-size: 2.5rem; margin-bottom: 1rem; }
+      .pillar-item p { font-size: 1.2rem; color: var(--muted); }
+
+      /* Conclusion */
+      .conclusion { padding: 15vw 10%; background: var(--white); text-align: center; }
+      .final-box { max-width: 900px; margin: 0 auto; background: var(--bg); padding: clamp(4rem, 10vw, 8rem); border-radius: 80px; }
+      .final-box h2 { font-size: clamp(3rem, 7vw, 5rem); font-weight: 800; margin-bottom: 2rem; letter-spacing: -2px; }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .member-grid, .reverse .member-grid { grid-template-columns: 1fr; }
+        .member-deep-dive { display: block; }
+        .philosophy-scroll { display: block; }
+        .img-frame { height: 450px; margin-bottom: 3rem; }
+        .sticky-title { position: relative; top: 0; margin-bottom: 3rem; }
+        .ticker-content span { font-size: 15vw; }
+      }
+    </style>
+
+    <!-- ===================== ABOUT PAGE SCRIPTS ===================== -->
+    <script>
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+      gsap.registerPlugin(ScrollTrigger);
+
+      window.addEventListener("load", () => {
+
+        // Hero Entrance Timeline
+        const heroTl = gsap.timeline();
+        heroTl
+          .to(".hero-mask-graphic", { opacity: 1, scale: 1, duration: 2, ease: "expo.out" })
+          .to(".m-title", { translateY: 0, duration: 1.5, ease: "power4.out", stagger: 0.2 }, "-=1.5")
+          .to(".hero-sub, .marquee-ticker", { opacity: 1, y: 0, duration: 1, stagger: 0.1 }, "-=1")
+          .to(".scroll-indicator", { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "-=0.8");
+
+        // Universal Reveal
+        const reveals = gsap.utils.toArray(".reveal, .reveal-left, .reveal-right");
+        reveals.forEach((el) => {
+          gsap.to(el, {
+            scrollTrigger: { trigger: el, start: "top 85%" },
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            ease: "power3.out"
+          });
+        });
+
+        // Hero Artwork Parallax
+        gsap.to(".hero-artwork-image", {
+          y: -100,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero-manifesto",
+            start: "top top",
+            end: "bottom top",
+            scrub: true
+          }
+        });
+
+        // Visual Break Parallax
+        gsap.to(".parallax-bg img", {
+          yPercent: 30,
+          ease: "none",
+          scrollTrigger: { trigger: ".visual-break", scrub: true }
+        });
+
+        // Member Bio Reveal
+        gsap.utils.toArray(".member-deep-dive").forEach((section) => {
+          const imgFrame = section.querySelector(".img-frame");
+          const txt = section.querySelector(".m-text");
+          gsap.to(imgFrame, { scrollTrigger: { trigger: section, start: "top 75%" }, opacity: 1, scale: 1, duration: 2, ease: "expo.out" });
+          gsap.from(txt, { scrollTrigger: { trigger: section, start: "top 75%" }, opacity: 0, y: 50, duration: 1.2, delay: 0.3 });
+        });
+
+        // Philosophy Pillars
+        gsap.utils.toArray(".p-reveal").forEach((pillar) => {
+          gsap.from(pillar, {
+            scrollTrigger: { trigger: pillar, start: "top 90%" },
+            opacity: 0,
+            x: -20,
+            duration: 1,
+            ease: "power2.out"
+          });
+        });
+
+      });
+    </script>
+  </body>
 </html>
