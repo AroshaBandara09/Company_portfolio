@@ -1,0 +1,289 @@
+---
+// src/components/common/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Main Footer Grid -->
+    <div class="footer-grid">
+      
+      <!-- Column 1: Brand -->
+      <div class="footer-col">
+        <div class="footer-logo">
+          <img src="/images/logo.jpeg" alt="Zynthera" class="footer-logo-img" />
+          <span class="footer-logo-text">Zynthera</span>
+        </div>
+        <p class="footer-description">
+          Connecting the future through innovative technology solutions.
+        </p>
+        <div class="social-icons">
+          <a href="#" class="social-icon" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="social-icon" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-icon" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Column 2: Quick Links -->
+      <div class="footer-col">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#solutions">Solutions</a></li>
+          <li><a href="#technology">Technology</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#insights">Insights</a></li>
+        </ul>
+      </div>
+      
+      <!-- Column 3: Services -->
+      <div class="footer-col">
+        <h3 class="footer-title">Services</h3>
+        <ul class="footer-links">
+          <li><a href="#">Offshore Development</a></li>
+          <li><a href="#">Team Building</a></li>
+          <li><a href="#">IT Consulting</a></li>
+          <li><a href="#">Quality Assurance</a></li>
+        </ul>
+      </div>
+      
+      <!-- Column 4: Contact Info -->
+      <div class="footer-col">
+        <h3 class="footer-title">Contact Us</h3>
+        <ul class="footer-contact">
+          <li>
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Colombo, Sri Lanka</span>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:hello@zynthera.com">hello@zynthera.com</a>
+          </li>
+          <li>
+            <i class="fas fa-phone-alt"></i>
+            <a href="tel:+94123456789">+94 12 345 6789</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <p>&copy; {currentYear} Zynthera. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/cookies">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style is:global>
+  .footer {
+    background: linear-gradient(135deg, #0a2540 0%, #0a1a2f 100%);
+    color: #ffffff;
+    padding: 60px 0 20px;
+    position: relative;
+    z-index: 1; /* Lower than header's 1000 */
+    width: 100%;
+  }
+
+  .footer-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  /* Brand Column */
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .footer-logo-img {
+    height: 40px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  .footer-logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #3399ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .footer-description {
+    color: #a0c4e8;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+  }
+
+  /* Social Icons */
+  .social-icons {
+    display: flex;
+    gap: 16px;
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+  }
+
+  .social-icon:hover {
+    background: #0066cc;
+    transform: translateY(-3px);
+  }
+
+  /* Footer Titles */
+  .footer-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ffffff;
+    position: relative;
+    padding-bottom: 10px;
+  }
+
+  .footer-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: #0066cc;
+  }
+
+  /* Footer Links */
+  .footer-links,
+  .footer-contact {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-links li,
+  .footer-contact li {
+    margin-bottom: 12px;
+  }
+
+  .footer-links a {
+    color: #a0c4e8;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+  }
+
+  .footer-links a:hover {
+    color: #0066cc;
+    padding-left: 5px;
+  }
+
+  /* Contact Items */
+  .footer-contact li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #a0c4e8;
+    font-size: 0.9rem;
+  }
+
+  .footer-contact i {
+    width: 20px;
+    color: #0066cc;
+    font-size: 1rem;
+  }
+
+  .footer-contact a {
+    color: #a0c4e8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-contact a:hover {
+    color: #0066cc;
+  }
+
+  /* Bottom Bar */
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.8rem;
+    color: #a0c4e8;
+  }
+
+  .footer-bottom-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-bottom-links a {
+    color: #a0c4e8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-bottom-links a:hover {
+    color: #0066cc;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .footer {
+      padding: 40px 0 20px;
+    }
+
+    .footer-container {
+      padding: 0 20px;
+    }
+
+    .footer-grid {
+      gap: 32px;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .footer-bottom-links {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+  }
+</style>
