@@ -1,0 +1,137 @@
+---
+// src/layouts/Layout.astro
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const { 
+  title = "Your Landing Page", 
+  description = "A modern landing page built with Astro",
+  image = "/images/og-image.png",
+  canonical = ""
+} = Astro.props;
+
+// Add structured data for better SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: title,
+  description: description,
+  url: canonical || Astro.url.href
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content={description} />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical || Astro.url.href} />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Canonical URL -->
+    {canonical && <link rel="canonical" href={canonical} />}
+    
+    <!-- Preconnect for external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    
+    <title>{title}</title>
+    
+    <!-- Global Styles -->
+    <style is:global>
+      /* CSS Reset */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      /* Remove default list styles */
+      ul, ol {
+        list-style: none;
+      }
+      
+      /* Remove default button styles */
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      
+      /* Remove default link styles */
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      
+      /* Basic body styles */
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        line-height: 1.5;
+        color: #1a1a1a;
+        background-color: #ffffff;
+      }
+      
+      /* Image optimization */
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+      
+      /* Focus styles for accessibility */
+      :focus-visible {
+        outline: 2px solid #0066ff;
+        outline-offset: 2px;
+      }
+      
+      /* Selection color */
+      ::selection {
+        background-color: #0066ff;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+    
+    <!-- Optional: Add analytics script -->
+    <!--
+    <script is:inline>
+      // Add Google Analytics or other tracking here
+    </script>
+    -->
+  </body>
+</html>
